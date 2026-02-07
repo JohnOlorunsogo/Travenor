@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import '../../core/theme/app_colors.dart';
-import '../../core/theme/app_text_styles.dart';
 import 'widgets/onboarding_page.dart';
 
 class OnboardingScreen extends StatefulWidget {
@@ -65,106 +64,28 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: AppColors.white,
-      body: SafeArea(
-        child: Column(
-          children: [
-            // Skip button (visible on pages 2 and 3)
-            _buildSkipButton(),
-            // Page content
-            Expanded(
-              child: PageView.builder(
-                controller: _pageController,
-                itemCount: _onboardingData.length,
-                onPageChanged: (index) {
-                  setState(() {
-                    _currentPage = index;
-                  });
-                },
-                itemBuilder: (context, index) {
-                  final data = _onboardingData[index];
-                  return OnboardingPage(
-                    imagePath: data['image']!,
-                    title: data['title']!,
-                    highlightedWord: data['highlight']!,
-                    subtitle: data['subtitle']!,
-                  );
-                },
-              ),
-            ),
-            // Bottom section with indicators and button
-            _buildBottomSection(),
-            const SizedBox(height: 40),
-          ],
-        ),
-      ),
-    );
-  }
-
-  Widget _buildSkipButton() {
-    return Container(
-      height: 56,
-      alignment: Alignment.centerRight,
-      padding: const EdgeInsets.symmetric(horizontal: 24),
-      child: AnimatedOpacity(
-        opacity: _currentPage > 0 ? 1.0 : 0.0,
-        duration: const Duration(milliseconds: 200),
-        child: GestureDetector(
-          onTap: _onSkipPressed,
-          child: Text('Skip', style: AppTextStyles.skipText),
-        ),
-      ),
-    );
-  }
-
-  Widget _buildBottomSection() {
-    return Padding(
-      padding: const EdgeInsets.symmetric(horizontal: 24),
-      child: Column(
-        children: [
-          // Page indicators
-          Row(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: List.generate(
-              _onboardingData.length,
-              (index) => _buildDotIndicator(index),
-            ),
-          ),
-          const SizedBox(height: 32),
-          // Next/Get Started button
-          SizedBox(
-            width: double.infinity,
-            height: 56,
-            child: ElevatedButton(
-              onPressed: _onNextPressed,
-              style: ElevatedButton.styleFrom(
-                backgroundColor: AppColors.accentTeal,
-                foregroundColor: AppColors.white,
-                shape: RoundedRectangleBorder(
-                  borderRadius: BorderRadius.circular(16),
-                ),
-                elevation: 0,
-              ),
-              child: Text(
-                _currentPage == 0 ? 'Get Started' : 'Next',
-                style: AppTextStyles.button,
-              ),
-            ),
-          ),
-        ],
-      ),
-    );
-  }
-
-  Widget _buildDotIndicator(int index) {
-    final isActive = index == _currentPage;
-    return AnimatedContainer(
-      duration: const Duration(milliseconds: 200),
-      margin: const EdgeInsets.symmetric(horizontal: 4),
-      width: isActive ? 35 : 8,
-      height: 8,
-      decoration: BoxDecoration(
-        color: isActive ? AppColors.accentTeal : AppColors.textLight,
-        borderRadius: BorderRadius.circular(4),
+      body: PageView.builder(
+        controller: _pageController,
+        itemCount: _onboardingData.length,
+        onPageChanged: (index) {
+          setState(() {
+            _currentPage = index;
+          });
+        },
+        itemBuilder: (context, index) {
+          final data = _onboardingData[index];
+          return OnboardingPage(
+            imagePath: data['image']!,
+            title: data['title']!,
+            highlightedWord: data['highlight']!,
+            subtitle: data['subtitle']!,
+            showSkip: index > 0,
+            onSkip: _onSkipPressed,
+            onNext: _onNextPressed,
+            currentPage: _currentPage,
+            totalPages: _onboardingData.length,
+          );
+        },
       ),
     );
   }

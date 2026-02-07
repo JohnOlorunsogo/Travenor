@@ -12,7 +12,7 @@ class AppColors {
   static const Color accentTeal = Color(0xFF24BAEC);
 
   // Background colors
-  static const Color splashBackground = Color(0xFF24BAEC);
+  static const Color splashBackground = Color.fromARGB(255, 11, 60, 76);
   static const Color white = Color(0xFFFFFFFF);
   static const Color background = Color(0xFFF5F5F5);
 

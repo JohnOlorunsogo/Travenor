@@ -71,10 +71,11 @@ class _SplashScreenState extends State<SplashScreen>
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
                     Spacer(),
-                    SvgPicture.asset('assets/svg/logo.svg'),
+                    // SvgPicture.asset('assets/svg/logo.svg'),
+                    Image.asset('assets/images/logo.png'),
                     Spacer(),
                     Padding(
-                      padding: const EdgeInsets.only(bottom: 26.0),
+                      padding: const EdgeInsets.only(bottom: 50.0),
                       child: Text(
                         "Travenor",
                         style: AppTextStyles.splashTitle.copyWith(
