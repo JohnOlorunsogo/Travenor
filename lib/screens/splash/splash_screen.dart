@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_svg/svg.dart';
 import 'package:go_router/go_router.dart';
 import '../../core/theme/app_colors.dart';
 import '../../core/theme/app_text_styles.dart';
@@ -70,8 +71,8 @@ class _SplashScreenState extends State<SplashScreen>
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
                     Spacer(),
-                    // SvgPicture.asset('assets/svg/logo.svg'),
-                    Image.asset('assets/images/logo.png'),
+                    SvgPicture.asset('assets/svg/logo.svg'),
+                    // Image.asset('assets/images/logo.png'),
                     Spacer(),
                     Padding(
                       padding: const EdgeInsets.only(bottom: 50.0),

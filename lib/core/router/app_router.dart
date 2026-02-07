@@ -5,6 +5,9 @@ import '../../screens/auth/sign_in_screen.dart';
 import '../../screens/auth/sign_up_screen.dart';
 import '../../screens/auth/forgot_password_screen.dart';
 import '../../screens/auth/otp_verification_screen.dart';
+import '../../screens/main/main_screen.dart';
+import '../../screens/details/details_screen.dart';
+import '../../screens/map/map_view_screen.dart';
 
 final appRouter = GoRouter(
   initialLocation: '/splash',
@@ -30,5 +33,11 @@ final appRouter = GoRouter(
       path: '/otp-verification',
       builder: (context, state) => const OtpVerificationScreen(),
     ),
+    GoRoute(path: '/main', builder: (context, state) => const MainScreen()),
+    GoRoute(
+      path: '/details',
+      builder: (context, state) => const DetailsScreen(),
+    ),
+    GoRoute(path: '/map', builder: (context, state) => const MapViewScreen()),
   ],
 );
