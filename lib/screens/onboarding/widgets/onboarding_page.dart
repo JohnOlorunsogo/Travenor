@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import '../../../core/theme/app_colors.dart';
 import '../../../core/theme/app_text_styles.dart';
+import '../../../core/widgets/highlighted_word.dart';
 
 class OnboardingPage extends StatelessWidget {
   final String imagePath;
@@ -152,7 +153,7 @@ class OnboardingPage extends StatelessWidget {
           if (parts.isNotEmpty) TextSpan(text: parts[0]),
           WidgetSpan(
             alignment: PlaceholderAlignment.middle,
-            child: _HighlightedWord(word: highlightedWord),
+            child: HighlightedWord(word: highlightedWord),
           ),
           if (parts.length > 1) TextSpan(text: parts[1]),
         ],
@@ -175,110 +176,4 @@ class OnboardingPage extends StatelessWidget {
       ),
     );
   }
-}
-
-/// Custom widget to show highlighted word with orange curve underline
-class _HighlightedWord extends StatelessWidget {
-  final String word;
-
-  const _HighlightedWord({required this.word});
-
-  @override
-  Widget build(BuildContext context) {
-    return Column(
-      mainAxisSize: MainAxisSize.min,
-      children: [
-        Text(
-          word,
-          style: AppTextStyles.accentText.copyWith(
-            fontSize: 32,
-            fontWeight: FontWeight.w800,
-            color: AppColors.accentOrange,
-          ),
-        ),
-        // Orange curve underline matching design
-        CustomPaint(size: const Size(80, 8), painter: _CurveUnderlinePainter()),
-      ],
-    );
-  }
-}
-
-/// Custom painter for the orange curve underline (smile shape)
-// class _CurveUnderlinePainter extends CustomPainter {
-//   @override
-//   void paint(Canvas canvas, Size size) {
-//     final paint = Paint()
-//       ..color = AppColors.accentOrange
-//       ..style = PaintingStyle.stroke
-//       ..strokeWidth = 3.0
-//       ..strokeCap = StrokeCap.round;
-
-//     final path = Path();
-//     // Start slightly to the left and end slightly to the right of central point
-//     path.moveTo(size.width * 0.1, 0);
-//     path.quadraticBezierTo(
-//       size.width * 0.5,
-//       size.height * 1.2,
-//       size.width * 0.9,
-//       0,
-//     );
-
-//     canvas.drawPath(path, paint);
-//   }
-
-//   @override
-//   bool shouldRepaint(covariant CustomPainter oldDelegate) => false;
-// }
-
-class _CurveUnderlinePainter extends CustomPainter {
-  @override
-  void paint(Canvas canvas, Size size) {
-    // Create the curve path
-    final path = Path();
-    path.moveTo(size.width * 0.01, 10);
-    path.quadraticBezierTo(
-      size.width * 0.5,
-      -size.height * 1.2,
-      size.width * 0.99,
-      10,
-    );
-
-    // Extract path metrics to draw with varying thickness
-    final pathMetrics = path.computeMetrics().first;
-    final totalLength = pathMetrics.length;
-
-    // Draw the path in segments with varying thickness
-    for (double i = 0; i < totalLength; i += 0.01) {
-      final t = i / totalLength; // Progress from 0 to 1
-
-      // Quadratic thickness variation
-      // Thinnest at ends (0 and 1), thickest at center (0.5)
-      final thickness = _getQuadraticThickness(t);
-
-      final tangent = pathMetrics.getTangentForOffset(i);
-      if (tangent != null) {
-        final paint = Paint()
-          ..color = AppColors.accentOrange
-          ..style = PaintingStyle.fill
-          ..strokeCap = StrokeCap.round;
-
-        canvas.drawCircle(tangent.position, thickness / 2, paint);
-      }
-    }
-  }
-
-  // Quadratic easing function for thickness
-  // Creates smooth transition: thin -> thick -> thin
-  double _getQuadraticThickness(double t) {
-    const minThickness = 1.5;
-    const maxThickness = 3.5;
-
-    // Inverted parabola: peaks at t=0.5
-    final normalized = 1 - 4 * (t - 0.5) * (t - 0.5);
-
-    return minThickness + (maxThickness - minThickness) * normalized;
-  }
-
-  @override
-  bool shouldRepaint(covariant CustomPainter oldDelegate) => false;
 }

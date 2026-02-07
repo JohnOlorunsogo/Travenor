@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
+import 'package:iconsax_plus/iconsax_plus.dart';
 import '../../core/theme/app_colors.dart';
 import '../../core/theme/app_text_styles.dart';
+import '../../core/widgets/highlighted_word.dart';
 
 class HomeScreen extends StatelessWidget {
   const HomeScreen({super.key});
@@ -22,8 +24,8 @@ class HomeScreen extends StatelessWidget {
                 children: [
                   Container(
                     padding: const EdgeInsets.symmetric(
-                      horizontal: 12,
-                      vertical: 8,
+                      horizontal: 5,
+                      vertical: 5,
                     ),
                     decoration: BoxDecoration(
                       color: AppColors.inputBackground,
@@ -32,19 +34,20 @@ class HomeScreen extends StatelessWidget {
                     child: Row(
                       children: [
                         const CircleAvatar(
-                          radius: 16,
+                          radius: 20,
                           backgroundImage: AssetImage(
-                            'assets/images/logo.png',
+                            'assets/images/p.png',
                           ), // Placeholder profile
                         ),
                         const SizedBox(width: 8),
                         Text(
-                          'Leonardo',
+                          'YoungJohn',
                           style: AppTextStyles.bodyMedium.copyWith(
                             fontWeight: FontWeight.w600,
                             color: AppColors.textPrimary,
                           ),
                         ),
+                        SizedBox(width: 10),
                       ],
                     ),
                   ),
@@ -55,7 +58,7 @@ class HomeScreen extends StatelessWidget {
                       shape: BoxShape.circle,
                     ),
                     child: const Icon(
-                      Icons.notifications_outlined,
+                      IconsaxPlusLinear.notification_bing,
                       color: AppColors.textPrimary,
                       size: 24,
                     ),
@@ -82,12 +85,11 @@ class HomeScreen extends StatelessWidget {
                         fontWeight: FontWeight.bold,
                       ),
                     ),
-                    TextSpan(
-                      text: 'world!',
-                      style: AppTextStyles.heading1.copyWith(
+                    WidgetSpan(
+                      alignment: PlaceholderAlignment.middle,
+                      child: const HighlightedWord(
+                        word: 'world!',
                         fontSize: 38,
-                        fontWeight: FontWeight.bold,
-                        color: AppColors.accentOrange,
                       ),
                     ),
                   ],

@@ -148,9 +148,9 @@ class CurvePainter extends CustomPainter {
 
   @override
   void paint(Canvas canvas, Size size) {
-    final paint = Paint()
-      ..color = color
-      ..style = PaintingStyle.fill;
+    // final paint = Paint()
+    //   ..color = color
+    //   ..style = PaintingStyle.fill;
 
     //   final path = Path();
 
@@ -307,13 +307,13 @@ class CurvePainter extends CustomPainter {
     canvas.drawPath(path_0, shadowPaint);
     canvas.restore();
 
-    Paint paint_0_fill = Paint()..style = PaintingStyle.fill;
-    paint_0_fill.color = color;
+    Paint paint0Fill = Paint()..style = PaintingStyle.fill;
+    paint0Fill.color = color;
 
     // Add shadow for depth (from the SVG filter)
     canvas.drawShadow(path_0, color, 8.0, false);
 
-    canvas.drawPath(path_0, paint_0_fill);
+    canvas.drawPath(path_0, paint0Fill);
   }
 
   @override
