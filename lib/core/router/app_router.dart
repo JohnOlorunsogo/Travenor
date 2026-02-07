@@ -4,6 +4,7 @@ import '../../screens/onboarding/onboarding_screen.dart';
 import '../../screens/auth/sign_in_screen.dart';
 import '../../screens/auth/sign_up_screen.dart';
 import '../../screens/auth/forgot_password_screen.dart';
+import '../../screens/auth/otp_verification_screen.dart';
 
 final appRouter = GoRouter(
   initialLocation: '/splash',
@@ -24,6 +25,10 @@ final appRouter = GoRouter(
     GoRoute(
       path: '/forgot-password',
       builder: (context, state) => const ForgotPasswordScreen(),
+    ),
+    GoRoute(
+      path: '/otp-verification',
+      builder: (context, state) => const OtpVerificationScreen(),
     ),
   ],
 );

@@ -18,7 +18,9 @@ class SignUpScreen extends StatelessWidget {
           padding: const EdgeInsets.only(left: 10),
           child: IconButton(
             icon: Container(
-              padding: const EdgeInsets.all(8),
+              width: 52,
+              height: 52,
+              padding: const EdgeInsets.only(right: 2),
               decoration: BoxDecoration(
                 color: AppColors.inputBackground,
                 shape: BoxShape.circle,
@@ -26,7 +28,7 @@ class SignUpScreen extends StatelessWidget {
               child: const Icon(
                 Icons.arrow_back_ios_new,
                 color: AppColors.textPrimary,
-                size: 18,
+                size: 16,
               ),
             ),
             onPressed: () => context.pop(),
@@ -130,12 +132,18 @@ class SignUpScreen extends StatelessWidget {
             Row(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
-                _buildSocialButton(Icons.facebook, Colors.blue),
-                const SizedBox(width: 20),
-                _buildSocialButton(Icons.camera_alt, Colors.redAccent),
+                _buildSocialButton(
+                  Image.asset("assets/images/facebook.png"),
+                  Colors.blue,
+                ),
                 const SizedBox(width: 20),
                 _buildSocialButton(
-                  Icons.alternate_email,
+                  Image.asset("assets/images/insta.png"),
+                  Colors.redAccent,
+                ),
+                const SizedBox(width: 20),
+                _buildSocialButton(
+                  Image.asset("assets/images/twitter.png"),
                   Colors.lightBlueAccent,
                 ),
               ],
@@ -147,11 +155,12 @@ class SignUpScreen extends StatelessWidget {
     );
   }
 
-  Widget _buildSocialButton(IconData icon, Color color) {
+  Widget _buildSocialButton(Widget child, Color color) {
     return Container(
+      width: 70,
       padding: const EdgeInsets.all(12),
       decoration: const BoxDecoration(shape: BoxShape.circle),
-      child: Icon(icon, color: color, size: 30),
+      child: child,
     );
   }
 }

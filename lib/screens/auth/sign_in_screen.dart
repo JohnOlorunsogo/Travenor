@@ -124,16 +124,23 @@ class SignInScreen extends StatelessWidget {
                 color: AppColors.textSecondary,
               ),
             ),
-            const SizedBox(height: 40),
+            // const SizedBox(height: 40),
+            // Spacer(),
             Row(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
-                _buildSocialButton(Icons.facebook, Colors.blue),
-                const SizedBox(width: 20),
-                _buildSocialButton(Icons.camera_alt, Colors.redAccent),
+                _buildSocialButton(
+                  Image.asset("assets/images/facebook.png"),
+                  Colors.blue,
+                ),
                 const SizedBox(width: 20),
                 _buildSocialButton(
-                  Icons.alternate_email,
+                  Image.asset("assets/images/insta.png"),
+                  Colors.redAccent,
+                ),
+                const SizedBox(width: 20),
+                _buildSocialButton(
+                  Image.asset("assets/images/twitter.png"),
                   Colors.lightBlueAccent,
                 ),
               ],
@@ -145,11 +152,12 @@ class SignInScreen extends StatelessWidget {
     );
   }
 
-  Widget _buildSocialButton(IconData icon, Color color) {
+  Widget _buildSocialButton(Widget child, Color color) {
     return Container(
+      width: 70,
       padding: const EdgeInsets.all(12),
       decoration: const BoxDecoration(shape: BoxShape.circle),
-      child: Icon(icon, color: color, size: 30),
+      child: child,
     );
   }
 }
