@@ -15,6 +15,7 @@ class AppColors {
   static const Color splashBackground = Color.fromARGB(255, 11, 60, 76);
   static const Color white = Color(0xFFFFFFFF);
   static const Color background = Color(0xFFF5F5F5);
+  static const Color inputBackground = Color(0xFFF7F7F9);
 
   // Text colors
   static const Color textPrimary = Color(0xFF1B1E28);

@@ -1,12 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:google_fonts/google_fonts.dart';
 import 'core/router/app_router.dart';
 import 'core/theme/app_colors.dart';
 
 void main() {
   WidgetsFlutterBinding.ensureInitialized();
-  
+
   // Set status bar style
   SystemChrome.setSystemUIOverlayStyle(
     const SystemUiOverlayStyle(
@@ -15,11 +16,7 @@ void main() {
     ),
   );
 
-  runApp(
-    const ProviderScope(
-      child: TravenorApp(),
-    ),
-  );
+  runApp(const ProviderScope(child: TravenorApp()));
 }
 
 class TravenorApp extends StatelessWidget {
@@ -37,7 +34,7 @@ class TravenorApp extends StatelessWidget {
           brightness: Brightness.light,
         ),
         scaffoldBackgroundColor: AppColors.white,
-        fontFamily: 'SF Pro Display',
+        textTheme: GoogleFonts.interTextTheme(),
       ),
       routerConfig: appRouter,
     );

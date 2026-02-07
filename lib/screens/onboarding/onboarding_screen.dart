@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:go_router/go_router.dart';
 import '../../core/theme/app_colors.dart';
 import 'widgets/onboarding_page.dart';
 
@@ -50,14 +51,12 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
         curve: Curves.easeInOut,
       );
     } else {
-      // Navigate to home/login - for now just print
-      debugPrint('Onboarding completed!');
+      context.push('/sign-in');
     }
   }
 
   void _onSkipPressed() {
-    // Navigate to home/login - for now just print
-    debugPrint('Skip pressed!');
+    context.push('/sign-in');
   }
 
   @override
