@@ -108,8 +108,8 @@ class HomeScreen extends StatelessWidget {
                   Text(
                     'View all',
                     style: AppTextStyles.bodyMedium.copyWith(
-                      color: AppColors.accentTeal,
-                      fontWeight: FontWeight.w600,
+                      color: AppColors.accentOrange,
+                      fontWeight: FontWeight.w400,
                     ),
                   ),
                 ],
