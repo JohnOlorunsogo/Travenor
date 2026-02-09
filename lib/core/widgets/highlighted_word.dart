@@ -14,6 +14,7 @@ class HighlightedWord extends StatelessWidget {
     return Column(
       mainAxisSize: MainAxisSize.min,
       children: [
+        // SizedBox(height: 10),
         Text(
           word,
           style: AppTextStyles.accentText.copyWith(

@@ -13,6 +13,13 @@ class AppTextStyles {
     height: 1.3,
   );
 
+  static TextStyle headingThin = GoogleFonts.poppins(
+    fontSize: 30,
+    // fontWeight: FontWeight.w300,
+    color: AppColors.textPrimary,
+    height: 1.3,
+  );
+
   static TextStyle heading2 = GoogleFonts.poppins(
     fontSize: 24,
     fontWeight: FontWeight.bold,

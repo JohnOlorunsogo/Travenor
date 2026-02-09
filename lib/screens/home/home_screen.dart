@@ -1,6 +1,8 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:iconsax_plus/iconsax_plus.dart';
+import 'package:travenor/screens/onboarding/widgets/stacked_user_avatar.dart';
 import '../../core/theme/app_colors.dart';
 import '../../core/theme/app_text_styles.dart';
 import '../../core/widgets/highlighted_word.dart';
@@ -73,11 +75,12 @@ class HomeScreen extends StatelessWidget {
                   children: [
                     TextSpan(
                       text: 'Explore the\n',
-                      style: AppTextStyles.heading1.copyWith(
+                      style: AppTextStyles.headingThin.copyWith(
                         fontSize: 38,
                         fontWeight: FontWeight.w300,
                       ),
                     ),
+
                     TextSpan(
                       text: 'Beautiful ',
                       style: AppTextStyles.heading1.copyWith(
@@ -89,7 +92,7 @@ class HomeScreen extends StatelessWidget {
                       alignment: PlaceholderAlignment.middle,
                       child: const HighlightedWord(
                         word: 'world!',
-                        fontSize: 38,
+                        // fontSize: 38,
                       ),
                     ),
                   ],
@@ -118,7 +121,7 @@ class HomeScreen extends StatelessWidget {
 
               // Destination Horizontal List
               SizedBox(
-                height: 380,
+                height: 450,
                 child: ListView(
                   scrollDirection: Axis.horizontal,
                   children: [
@@ -140,6 +143,7 @@ class HomeScreen extends StatelessWidget {
                   ],
                 ),
               ),
+              SizedBox(height: 20),
             ],
           ),
         ),
@@ -154,98 +158,116 @@ class HomeScreen extends StatelessWidget {
     String imagePath,
     String rating,
   ) {
-    return GestureDetector(
-      onTap: () => context.push('/details'),
-      child: Container(
-        width: 260,
-        padding: const EdgeInsets.all(12),
-        decoration: BoxDecoration(
-          color: AppColors.white,
-          borderRadius: BorderRadius.circular(24),
-          boxShadow: [
-            BoxShadow(
-              color: AppColors.shadow.withValues(alpha: 0.05),
-              blurRadius: 10,
-              offset: const Offset(0, 5),
-            ),
-          ],
-        ),
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            Expanded(
-              child: ClipRRect(
-                borderRadius: BorderRadius.circular(20),
-                child: Stack(
-                  children: [
-                    Image.asset(
-                      imagePath,
-                      width: double.infinity,
-                      fit: BoxFit.cover,
-                    ),
-                    Positioned(
-                      top: 12,
-                      right: 12,
-                      child: Container(
-                        padding: const EdgeInsets.all(8),
-                        decoration: BoxDecoration(
-                          color: AppColors.white.withValues(alpha: 0.3),
-                          shape: BoxShape.circle,
-                        ),
-                        child: const Icon(
-                          Icons.bookmark_border,
-                          color: AppColors.white,
-                          size: 20,
-                        ),
-                      ),
-                    ),
-                  ],
-                ),
+    return Padding(
+      padding: const EdgeInsets.symmetric(vertical: 14, horizontal: 8),
+      child: GestureDetector(
+        onTap: () => context.push('/details'),
+        child: Container(
+          width: 300,
+          padding: const EdgeInsets.all(14),
+          decoration: BoxDecoration(
+            color: AppColors.white,
+            borderRadius: BorderRadius.circular(28),
+            boxShadow: [
+              BoxShadow(
+                color: AppColors.shadow.withValues(alpha: 0.03),
+                blurRadius: 5,
+                offset: const Offset(0, 4),
               ),
-            ),
-            const SizedBox(height: 16),
-            Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: [
-                Text(
-                  title,
-                  style: AppTextStyles.heading2.copyWith(fontSize: 18),
-                ),
-                Row(
-                  children: [
-                    const Icon(Icons.star, color: Colors.amber, size: 18),
-                    const SizedBox(width: 4),
-                    Text(
-                      rating,
-                      style: AppTextStyles.bodyMedium.copyWith(
-                        fontWeight: FontWeight.bold,
-                        fontSize: 14,
+            ],
+          ),
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Expanded(
+                child: ClipRRect(
+                  borderRadius: BorderRadius.circular(24),
+                  child: Stack(
+                    children: [
+                      Image.asset(
+                        imagePath,
+                        width: double.infinity,
+                        fit: BoxFit.cover,
                       ),
-                    ),
-                  ],
-                ),
-              ],
-            ),
-            const SizedBox(height: 8),
-            Row(
-              children: [
-                const Icon(
-                  Icons.location_on_outlined,
-                  color: AppColors.textSecondary,
-                  size: 16,
-                ),
-                const SizedBox(width: 4),
-                Text(
-                  location,
-                  style: AppTextStyles.bodyMedium.copyWith(
-                    color: AppColors.textSecondary,
-                    fontSize: 14,
+                      Positioned(
+                        top: 8,
+                        right: 8,
+                        child: Container(
+                          padding: const EdgeInsets.all(8),
+                          decoration: BoxDecoration(
+                            color: AppColors.shadow.withValues(alpha: 0.3),
+                            shape: BoxShape.circle,
+                          ),
+                          child: const Icon(
+                            Icons.bookmark_border_rounded,
+                            color: AppColors.white,
+                            size: 20,
+                          ),
+                        ),
+                      ),
+                    ],
                   ),
                 ),
-              ],
-            ),
-            const SizedBox(height: 8),
-          ],
+              ),
+              const SizedBox(height: 14),
+              Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  Text(
+                    title,
+                    style: AppTextStyles.headingThin.copyWith(
+                      fontSize: 17,
+                      fontWeight: FontWeight.w600,
+                    ),
+                  ),
+                  Row(
+                    children: [
+                      const Icon(Icons.star, color: Colors.amber, size: 18),
+                      const SizedBox(width: 4),
+                      Text(
+                        rating,
+                        style: AppTextStyles.bodyMedium.copyWith(
+                          fontWeight: FontWeight.bold,
+                          fontSize: 14,
+                        ),
+                      ),
+                    ],
+                  ),
+                ],
+              ),
+              const SizedBox(height: 8),
+              Row(
+                children: [
+                  const Icon(
+                    Icons.location_on_outlined,
+                    color: AppColors.textSecondary,
+                    size: 16,
+                  ),
+                  const SizedBox(width: 4),
+                  Text(
+                    location,
+                    style: AppTextStyles.bodyMedium.copyWith(
+                      color: AppColors.textSecondary,
+                      fontSize: 14,
+                    ),
+                  ),
+                  Spacer(),
+
+                  OverlappingAvatars(
+                    avatars: const [
+                      AssetImage("assets/images/p.png"),
+                      AssetImage("assets/images/p2.jpg"),
+                      AssetImage("assets/images/p3.png"),
+                    ],
+                    extraCount: 50,
+                    size: 20, // circle size
+                    overlap: 5, // how much they overlap
+                  ),
+                ],
+              ),
+              const SizedBox(height: 8),
+            ],
+          ),
         ),
       ),
     );
