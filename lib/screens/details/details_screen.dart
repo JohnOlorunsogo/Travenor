@@ -16,7 +16,7 @@ class DetailsScreen extends StatelessWidget {
             top: 0,
             left: 0,
             right: 0,
-            height: MediaQuery.of(context).size.height * 0.5,
+            height: MediaQuery.of(context).size.height * 0.6,
             child: Image.asset(
               'assets/images/onboarding_1.png',
               fit: BoxFit.cover,
@@ -74,7 +74,7 @@ class DetailsScreen extends StatelessWidget {
             bottom: 0,
             left: 0,
             right: 0,
-            height: MediaQuery.of(context).size.height * 0.58,
+            height: MediaQuery.of(context).size.height * 0.46,
             child: Container(
               padding: const EdgeInsets.all(24),
               decoration: const BoxDecoration(

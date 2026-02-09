@@ -50,6 +50,13 @@ class AppTextStyles {
     height: 1.5,
   );
 
+  static TextStyle bodySmall = GoogleFonts.inter(
+    fontSize: 12,
+    fontWeight: FontWeight.normal,
+    color: AppColors.textSecondary,
+    height: 1.4,
+  );
+
   // Button text
   static TextStyle button = GoogleFonts.inter(
     fontSize: 16,
