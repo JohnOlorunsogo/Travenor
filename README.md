@@ -1,4 +1,4 @@
-# 🌴 Travenor - Travel App UI
+# Travenor - Travel App UI
 
 <div align="center">
 
@@ -16,24 +16,24 @@
 
 ---
 
-## 📖 Overview
+## Overview
 
 **Travenor** is a modern travel application UI/UX implementation built entirely with Flutter. This project showcases beautiful, responsive design patterns and smooth animations without any backend logic implementation. It serves as an excellent reference for building polished mobile interfaces.
 
-> ⚠️ **Note**: This is a UI-only implementation. No backend services, authentication, or data persistence logic is included.
+> **Note**: This is a UI-only implementation. No backend services, authentication, or data persistence logic is included.
 
 ---
 
-## ✨ Features
+## Features
 
-### 🎨 Design Highlights
+### Design Highlights
 - **Custom Painters** - Hand-crafted shapes using Flutter's CustomPainter API
 - **Premium Aesthetics** - Glassmorphism, gradients, and modern color schemes
 - **Responsive Layout** - Adapts seamlessly to different screen sizes
 - **Smooth Animations** - Subtle micro-interactions and transitions
 - **Custom Navigation** - Unique bottom navigation bar with curved design
 
-### 📱 Implemented Screens
+### Implemented Screens
 | Screen | Description |
 |--------|-------------|
 | **Splash** | Animated brand introduction with logo |
@@ -49,7 +49,7 @@
 
 ---
 
-## 📸 Screenshots
+## Screenshots
 
 <div align="center">
 
@@ -72,7 +72,7 @@
 
 ---
 
-## 🚀 Installation
+## Installation
 
 ### Prerequisites
 - Flutter SDK `^3.9.0`
@@ -97,7 +97,7 @@ flutter run
 
 ---
 
-## 🏗 Architecture
+## Architecture
 
 ```
 lib/
@@ -136,7 +136,7 @@ lib/
 
 ---
 
-## 🛠 Technologies
+## Technologies
 
 | Package | Purpose |
 |---------|---------|
@@ -148,7 +148,7 @@ lib/
 
 ---
 
-## 🎨 Design System
+## Design System
 
 ### Color Palette
 | Color | Hex | Usage |
@@ -166,7 +166,7 @@ lib/
 
 ---
 
-## 📂 Assets Structure
+## Assets Structure
 
 ```
 assets/
@@ -182,7 +182,7 @@ assets/
 
 ---
 
-## 🤝 Contributing
+## Contributing
 
 Contributions are welcome! Feel free to:
 1. Fork the repository
@@ -193,13 +193,13 @@ Contributions are welcome! Feel free to:
 
 ---
 
-## 📄 License
+## License
 
 This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
 
 ---
 
-## 🙏 Acknowledgments
+## Acknowledgments
 
 - Design inspiration from various Dribbble concepts
 - Flutter team for the amazing framework
@@ -209,6 +209,6 @@ This project is licensed under the MIT License - see the [LICENSE](LICENSE) file
 
 <div align="center">
 
-**Made with ❤️ and Flutter**
+**Made with Flutter**
 
 </div>
