@@ -57,7 +57,7 @@ class ForgotPasswordScreen extends StatelessWidget {
     );
 
     // Automatically navigate to OTP screen after a short delay
-    Future.delayed(const Duration(seconds: 2), () {
+    Future.delayed(const Duration(seconds: 6), () {
       if (context.mounted) {
         context.pop(); // Close dialog
         context.push('/otp-verification');

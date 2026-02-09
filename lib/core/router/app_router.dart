@@ -8,6 +8,7 @@ import '../../screens/auth/otp_verification_screen.dart';
 import '../../screens/main/main_screen.dart';
 import '../../screens/details/details_screen.dart';
 import '../../screens/map/map_view_screen.dart';
+import '../../models/destination.dart';
 
 final appRouter = GoRouter(
   initialLocation: '/splash',
@@ -36,7 +37,10 @@ final appRouter = GoRouter(
     GoRoute(path: '/main', builder: (context, state) => const MainScreen()),
     GoRoute(
       path: '/details',
-      builder: (context, state) => const DetailsScreen(),
+      builder: (context, state) {
+        final destination = state.extra as Destination;
+        return DetailsScreen(destination: destination);
+      },
     ),
     GoRoute(path: '/map', builder: (context, state) => const MapViewScreen()),
   ],

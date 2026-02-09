@@ -226,7 +226,7 @@ class HomeScreen extends StatelessWidget {
 
   Widget _buildGridCard(BuildContext context, Destination destination) {
     return GestureDetector(
-      onTap: () => context.push('/details'),
+      onTap: () => context.push('/details', extra: destination),
       child: Container(
         decoration: BoxDecoration(
           color: AppColors.white,
@@ -363,7 +363,7 @@ class HomeScreen extends StatelessWidget {
     return Padding(
       padding: const EdgeInsets.symmetric(vertical: 14, horizontal: 8),
       child: GestureDetector(
-        onTap: () => context.push('/details'),
+        onTap: () => context.push('/details', extra: destination),
         child: Container(
           width: 300,
           padding: const EdgeInsets.all(14),

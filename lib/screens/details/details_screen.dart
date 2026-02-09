@@ -1,29 +1,29 @@
 import 'package:flutter/material.dart';
 import '../../core/theme/app_colors.dart';
 import '../../core/theme/app_text_styles.dart';
+import '../../models/destination.dart';
+import 'widgets/details_bottom_sheet_painter.dart';
 
 class DetailsScreen extends StatelessWidget {
-  const DetailsScreen({super.key});
+  final Destination destination;
+
+  const DetailsScreen({super.key, required this.destination});
 
   @override
   Widget build(BuildContext context) {
+    final screenHeight = MediaQuery.of(context).size.height;
+    final bottomSheetHeight = screenHeight * 0.52;
+
     return Scaffold(
-      backgroundColor: AppColors.white,
+      backgroundColor: AppColors.background,
       body: Stack(
         children: [
-          // Background Image
-          Positioned(
-            top: 0,
-            left: 0,
-            right: 0,
-            height: MediaQuery.of(context).size.height * 0.6,
-            child: Image.asset(
-              'assets/images/onboarding_1.png',
-              fit: BoxFit.cover,
-            ),
+          // Background Image - Full screen behind
+          Positioned.fill(
+            child: Image.asset(destination.pictures.first, fit: BoxFit.cover),
           ),
 
-          // Action Buttons
+          // Top Action Buttons
           Positioned(
             top: MediaQuery.of(context).padding.top + 10,
             left: 20,
@@ -31,20 +31,9 @@ class DetailsScreen extends StatelessWidget {
             child: Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
-                GestureDetector(
+                _buildCircleButton(
+                  icon: Icons.arrow_back_ios_new,
                   onTap: () => Navigator.pop(context),
-                  child: Container(
-                    padding: const EdgeInsets.all(10),
-                    decoration: BoxDecoration(
-                      color: AppColors.white.withValues(alpha: 0.2),
-                      shape: BoxShape.circle,
-                    ),
-                    child: const Icon(
-                      Icons.arrow_back_ios_new,
-                      color: AppColors.white,
-                      size: 18,
-                    ),
-                  ),
                 ),
                 Text(
                   'Details',
@@ -53,169 +42,192 @@ class DetailsScreen extends StatelessWidget {
                     fontSize: 18,
                   ),
                 ),
-                Container(
-                  padding: const EdgeInsets.all(10),
-                  decoration: BoxDecoration(
-                    color: AppColors.white.withValues(alpha: 0.2),
-                    shape: BoxShape.circle,
-                  ),
-                  child: const Icon(
-                    Icons.bookmark_border,
-                    color: AppColors.white,
-                    size: 20,
-                  ),
+                _buildCircleButton(
+                  icon: destination.isFavorite
+                      ? Icons.bookmark_rounded
+                      : Icons.bookmark_border_rounded,
+                  onTap: () {},
                 ),
               ],
             ),
           ),
 
-          // Content Card
+          // Bottom Sheet with Custom Painter
           Positioned(
             bottom: 0,
             left: 0,
             right: 0,
-            height: MediaQuery.of(context).size.height * 0.46,
-            child: Container(
-              padding: const EdgeInsets.all(24),
-              decoration: const BoxDecoration(
-                color: AppColors.white,
-                borderRadius: BorderRadius.only(
-                  topLeft: Radius.circular(40),
-                  topRight: Radius.circular(40),
-                ),
-              ),
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  Center(
-                    child: Container(
-                      width: 40,
-                      height: 5,
-                      decoration: BoxDecoration(
-                        color: AppColors.divider,
-                        borderRadius: BorderRadius.circular(10),
-                      ),
+            child: DetailsBottomSheet(
+              height: bottomSheetHeight,
+              color: AppColors.white,
+              child: _buildBottomContent(context),
+            ),
+          ),
+        ],
+      ),
+    );
+  }
+
+  Widget _buildCircleButton({
+    required IconData icon,
+    required VoidCallback onTap,
+  }) {
+    return GestureDetector(
+      onTap: onTap,
+      child: Container(
+        padding: const EdgeInsets.all(12),
+        decoration: BoxDecoration(
+          color: AppColors.accentTeal.withValues(alpha: 0.7),
+          shape: BoxShape.circle,
+        ),
+        child: Icon(icon, color: AppColors.white, size: 18),
+      ),
+    );
+  }
+
+  Widget _buildBottomContent(BuildContext context) {
+    return Padding(
+      padding: const EdgeInsets.fromLTRB(24, 30, 24, 24),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          // Title and Avatar Row
+          Row(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Expanded(
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Text(
+                      destination.name,
+                      style: AppTextStyles.heading1.copyWith(fontSize: 24),
+                      maxLines: 2,
+                      overflow: TextOverflow.ellipsis,
                     ),
-                  ),
-                  const SizedBox(height: 24),
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: [
-                      Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          Text(
-                            'Niladri Reservoir',
-                            style: AppTextStyles.heading1.copyWith(
-                              fontSize: 24,
-                            ),
-                          ),
-                          const SizedBox(height: 4),
-                          Text(
-                            'Tekergat, Sunamgnj',
-                            style: AppTextStyles.bodyMedium.copyWith(
-                              color: AppColors.textSecondary,
-                            ),
-                          ),
-                        ],
-                      ),
-                      const CircleAvatar(
-                        radius: 20,
-                        backgroundImage: AssetImage('assets/images/logo.png'),
-                      ),
-                    ],
-                  ),
-                  const SizedBox(height: 20),
-                  Row(
-                    children: [
-                      const Icon(
-                        Icons.location_on_outlined,
-                        size: 16,
+                    const SizedBox(height: 4),
+                    Text(
+                      destination.location,
+                      style: AppTextStyles.bodyMedium.copyWith(
                         color: AppColors.textSecondary,
                       ),
-                      const SizedBox(width: 4),
-                      Text(
-                        'Tekergat',
-                        style: AppTextStyles.bodyMedium.copyWith(
-                          color: AppColors.textSecondary,
-                        ),
-                      ),
-                      const Spacer(),
-                      const Icon(Icons.star, color: Colors.amber, size: 16),
-                      const SizedBox(width: 4),
-                      Text(
-                        '4.7 (2498)',
-                        style: AppTextStyles.bodyMedium.copyWith(
-                          fontWeight: FontWeight.bold,
-                        ),
-                      ),
-                      const SizedBox(width: 8),
-                      Text(
-                        '\$59/Person',
-                        style: AppTextStyles.bodyMedium.copyWith(
-                          color: AppColors.accentTeal,
-                          fontWeight: FontWeight.bold,
-                        ),
-                      ),
-                    ],
-                  ),
-                  const SizedBox(height: 24),
-
-                  // Mini Gallery (Simulated)
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: [
-                      _buildGalleryItem('assets/images/onboarding_1.png'),
-                      _buildGalleryItem('assets/images/onboarding_2.png'),
-                      _buildGalleryItem('assets/images/onboarding_3.png'),
-                      _buildGalleryItem('assets/images/onboarding_1.png'),
-                      _buildGalleryItem(
-                        'assets/images/onboarding_2.png',
-                        overlay: '+38',
-                      ),
-                    ],
-                  ),
-
-                  const SizedBox(height: 24),
-                  Text(
-                    'About Destination',
-                    style: AppTextStyles.heading2.copyWith(fontSize: 20),
-                  ),
-                  const SizedBox(height: 12),
-                  Expanded(
-                    child: SingleChildScrollView(
-                      child: Text(
-                        'You will get a complete travel package on the beaches. Packages in the form of airline tickets, recommended hotel rooms, Transportation. Have you ever been on holiday to the Great ETC... Read More',
-                        style: AppTextStyles.bodyLarge.copyWith(
-                          color: AppColors.textSecondary,
-                          fontSize: 15,
-                        ),
-                      ),
                     ),
-                  ),
-                  const SizedBox(height: 20),
+                  ],
+                ),
+              ),
+              const CircleAvatar(
+                radius: 24,
+                backgroundImage: AssetImage('assets/images/p.png'),
+              ),
+            ],
+          ),
+          const SizedBox(height: 16),
 
-                  // Booking Button
-                  SizedBox(
-                    width: double.infinity,
-                    height: 56,
-                    child: ElevatedButton(
-                      onPressed: () {},
-                      style: ElevatedButton.styleFrom(
-                        backgroundColor: AppColors.accentTeal,
-                        foregroundColor: AppColors.white,
-                        elevation: 0,
-                        shape: RoundedRectangleBorder(
-                          borderRadius: BorderRadius.circular(16),
-                        ),
-                      ),
-                      child: Text(
-                        'Book Now',
-                        style: AppTextStyles.button.copyWith(fontSize: 18),
-                      ),
-                    ),
-                  ),
-                ],
+          // Location, Rating, Price Row
+          Row(
+            children: [
+              const Icon(
+                Icons.location_on_outlined,
+                size: 16,
+                color: AppColors.textSecondary,
+              ),
+              const SizedBox(width: 4),
+              Text(
+                destination.location,
+                style: AppTextStyles.bodyMedium.copyWith(
+                  color: AppColors.textSecondary,
+                ),
+              ),
+              const SizedBox(width: 20),
+              const Icon(Icons.star, color: Colors.amber, size: 16),
+              const SizedBox(width: 4),
+              Text(
+                '${destination.rating.rate} (${destination.rating.people})',
+                style: AppTextStyles.bodyMedium.copyWith(
+                  fontWeight: FontWeight.bold,
+                ),
+              ),
+              const Spacer(),
+              Text(
+                '\$${destination.price.toInt()}',
+                style: AppTextStyles.bodyMedium.copyWith(
+                  color: AppColors.accentTeal,
+                  fontWeight: FontWeight.bold,
+                  fontSize: 16,
+                ),
+              ),
+              Text(
+                '/Person',
+                style: AppTextStyles.bodySmall.copyWith(
+                  color: AppColors.accentTeal,
+                ),
+              ),
+            ],
+          ),
+          const SizedBox(height: 20),
+
+          // Mini Gallery
+          SizedBox(
+            height: 56,
+            child: ListView.builder(
+              scrollDirection: Axis.horizontal,
+              itemCount: _getGalleryItems().length,
+              itemBuilder: (context, index) {
+                final items = _getGalleryItems();
+                if (index == items.length - 1 && items.length >= 5) {
+                  return _buildGalleryItem(
+                    items[index],
+                    overlay: '+${destination.rating.people ~/ 100}',
+                  );
+                }
+                return Padding(
+                  padding: const EdgeInsets.only(right: 12),
+                  child: _buildGalleryItem(items[index]),
+                );
+              },
+            ),
+          ),
+          const SizedBox(height: 20),
+
+          // About Section Header
+          Text(
+            'About Destination',
+            style: AppTextStyles.heading2.copyWith(fontSize: 18),
+          ),
+          const SizedBox(height: 10),
+
+          // Scrollable About Content
+          Expanded(
+            child: SingleChildScrollView(
+              physics: const BouncingScrollPhysics(),
+              child: Text(
+                destination.about,
+                style: AppTextStyles.bodyMedium.copyWith(
+                  color: AppColors.textSecondary,
+                  height: 1.6,
+                ),
+              ),
+            ),
+          ),
+          const SizedBox(height: 16),
+
+          // Book Now Button
+          SizedBox(
+            width: double.infinity,
+            height: 56,
+            child: ElevatedButton(
+              onPressed: () {},
+              style: ElevatedButton.styleFrom(
+                backgroundColor: AppColors.accentTeal,
+                foregroundColor: AppColors.white,
+                elevation: 0,
+                shape: RoundedRectangleBorder(
+                  borderRadius: BorderRadius.circular(16),
+                ),
+              ),
+              child: Text(
+                'Book Now',
+                style: AppTextStyles.button.copyWith(fontSize: 18),
               ),
             ),
           ),
@@ -224,19 +236,37 @@ class DetailsScreen extends StatelessWidget {
     );
   }
 
+  List<String> _getGalleryItems() {
+    // Use destination pictures plus some fallback images
+    final List<String> gallery = [...destination.pictures];
+
+    // Add placeholder images if less than 5
+    final placeholders = [
+      'assets/images/onboarding_1.png',
+      'assets/images/onboarding_2.png',
+      'assets/images/onboarding_3.png',
+    ];
+
+    while (gallery.length < 5) {
+      gallery.add(placeholders[gallery.length % placeholders.length]);
+    }
+
+    return gallery.take(5).toList();
+  }
+
   Widget _buildGalleryItem(String imagePath, {String? overlay}) {
     return Container(
-      width: 50,
-      height: 50,
+      width: 56,
+      height: 56,
       decoration: BoxDecoration(
-        borderRadius: BorderRadius.circular(12),
+        borderRadius: BorderRadius.circular(14),
         image: DecorationImage(image: AssetImage(imagePath), fit: BoxFit.cover),
       ),
       child: overlay != null
           ? Container(
               decoration: BoxDecoration(
-                color: Colors.black45,
-                borderRadius: BorderRadius.circular(12),
+                color: Colors.black54,
+                borderRadius: BorderRadius.circular(14),
               ),
               child: Center(
                 child: Text(
