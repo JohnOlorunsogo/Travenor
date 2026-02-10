@@ -9,6 +9,8 @@ import '../../screens/main/main_screen.dart';
 import '../../screens/details/details_screen.dart';
 import '../../screens/map/map_view_screen.dart';
 import '../../models/destination.dart';
+import '../../screens/message/chat_details_screen.dart';
+import '../../screens/message/message_screen.dart';
 
 final appRouter = GoRouter(
   initialLocation: '/splash',
@@ -43,5 +45,12 @@ final appRouter = GoRouter(
       },
     ),
     GoRoute(path: '/map', builder: (context, state) => const MapViewScreen()),
+    GoRoute(
+      path: '/chat',
+      builder: (context, state) {
+        final contact = state.extra as MockMessage;
+        return ChatDetailsScreen(contact: contact);
+      },
+    ),
   ],
 );

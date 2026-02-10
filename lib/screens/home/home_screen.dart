@@ -24,7 +24,6 @@ class HomeScreen extends StatelessWidget {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              // Header
               Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
@@ -41,9 +40,7 @@ class HomeScreen extends StatelessWidget {
                       children: [
                         const CircleAvatar(
                           radius: 20,
-                          backgroundImage: AssetImage(
-                            'assets/images/p.png',
-                          ), // Placeholder profile
+                          backgroundImage: AssetImage('assets/images/p.png'),
                         ),
                         const SizedBox(width: 8),
                         Text(
